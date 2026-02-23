@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Arabic Learning</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href=BBstyle.css rel= stylesheet type="text/css"/>
+    <script src="testScript.js"></script>
+    <script>
+      window.onload = function() {
+          if (localStorage.getItem("accessGranted") === "true") {
+              customizeForAnny();
+              hideAccessSection();
+              createRemoveKeyButton();
+          }
+        document.getElementById('test-section').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+      };
+  
+      function checkAccessKey() {
+          let accessCode = document.getElementById("access-code").value;
+          if (accessCode === "Anny8675") {
+              localStorage.setItem("accessGranted", "true");
+              customizeForAnny();
+              createRemoveKeyButton();
+              document.getElementById("anny-access").style.display = "none";
+          } else {
+              alert("Incorrect access code.");
+          }
+      }
+  
+      function hideAccessSection() {
+          document.getElementById("anny-access").style.display = "none";
+      }
+      function customizeForAnny() {
+          // Branding
+        document.getElementById("branding").innerHTML = '<h1><span class="highlight">Anny\'s</span> Arabic Adventure</h1>';
+        document.querySelector('#showcase h1').textContent = 'Welcome to Your Fun Arabic Adventure, Anny! 🌈📚';
+        document.querySelector('.info-section h2').textContent = 'Hey Anny! 😊';
+        document.querySelector('.info-section p').innerHTML = 'This is our special corner just for you! We made this cool space where you can dive into Arabic and have a blast learning. It’s all about connecting with our awesome culture and having fun while doing it. Let’s explore this together! 🌟🎉';
+  
+          // Customizing the Alphabet Section
+          var alphabetSection = document.querySelector('.box:first-child h3');
+          if (alphabetSection) {
+              alphabetSection.innerHTML = '<a href="letters.html">Anny\'s Alphabet</a>';
+              document.querySelector('.box:first-child p').textContent = 'Start exploring the letters of the Arabic alphabet, Anny style! 🎨🔡';
+          }
+    
+          // Customizing the Exercises Section
+          var exercisesSection = document.querySelector('.box:last-child h3');
+          if (exercisesSection) {
+              exercisesSection.innerHTML = '<a href="exercises.html">Anny\'s Fun Exercises</a>';
+              document.querySelector('.box:last-child p').textContent = 'Dive into some cool exercises to boost your Arabic skills! 💪🧠';
+          }
+            // Footer Customization
+            document.getElementById("footer").innerHTML = '<p>Anny\'s Arabic Learning Site &copy; 2023</p>';
+      };
+      function createRemoveKeyButton() {
+          if (localStorage.getItem("accessGranted") === "true") {
+              var removeKeyButton = document.createElement('button');
+              removeKeyButton.textContent = 'Remove Key';
+              removeKeyButton.style.padding = '10px';
+              removeKeyButton.style.marginTop = '20px';
+              removeKeyButton.style.backgroundColor = '#e8491d';
+              removeKeyButton.style.color = 'white';
+              removeKeyButton.style.border = 'none';
+              removeKeyButton.style.borderRadius = '5px';
+              removeKeyButton.style.cursor = 'pointer';
+              removeKeyButton.onclick = function() {
+                  localStorage.removeItem('accessGranted');
+                  location.reload();
+              };
+  
+              // Append the button to a specific part of your page, like the footer
+              var footer = document.getElementById('footer');
+              if (footer) {
+                  footer.appendChild(removeKeyButton);
+              } else {
+                  console.error('Footer not found for appending the Remove Key button.');
+              }
+          }
+        
+      }
+      function startTest() {
+          document.getElementById('main-content').style.display = 'none';
+          document.getElementById('test-section').style.display = 'block';
+          initializeTest();
+      }
+  
+  
+    </script>
+    <style>
+        body {
+            font-family: 'Arial', 'Noto Naskh Arabic', sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #50b3a2;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #e8491d 3px solid;
+        }
+        header a {
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        header ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            overflow: hidden;
+        }
+        header li {
+            float: left;
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+        header #branding {
+            float: left;
+        }
+        header #branding h1 {
+            margin: 0;
+        }
+        header nav {
+            float: right;
+            margin-top: 10px;
+        }
+        header .highlight, header .current a {
+            color: #e8491d;
+            font-weight: bold;
+        }
+        header a:hover {
+            color: #ffffff;
+            font-weight: bold;
+        }
+        #anny-access {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f4f8; /* Light blue background */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+    
+        #anny-access p {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+    
+        #anny-access input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 200px;
+        }
+    
+        #anny-access button {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            background-color: #4CAF50; /* Green background for buttons */
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    
+        #anny-access button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+  <body>
+    <div id="main-content">
+      <header>
+          <div class="container">
+              <div id="branding">
+                  <h1><span class="highlight">Arabic</span> Learning</h1>
+              </div>
+              <nav>
+                  <ul>
+                      <li class="current"><a href="index.html">Home</a></li>
+                      <li><a href="exercises.html">Exercises</a></li>
+                      <li><a href="letters.html">Letters</a></li>
+                      <li><a href="cultural_insights.html">Cultural Insights</a></li> <!-- New link -->
+                  </ul>
+              </nav>
+          </div>
+      </header>
+      <div class="container">
+          <section id="showcase">
+            <div id="anny-access">
+                <p>Enter the access code for Anny's special experience:</p>
+                <input type="text" id="access-code" placeholder="Access Code">
+                <button onclick="checkAccessKey()">Submit</button>
+                <button onclick="hideAccessSection()">What is this?</button>
+            </div>
+              <div class="container">
+                  <h1>Welcome to Your Arabic Learning Journey</h1>
+                  <div class="info-section">
+                      <h2>About Our Website</h2>
+                      <p>
+                          Welcome to our platform, designed for those with Egyptian heritage who grew up speaking Arabic in a family environment but might not have had the opportunity to learn the written language formally. Our website bridges this gap by offering an engaging way to learn reading and writing, thus deepening your connection to your roots.
+                      </p>
+                      <p>
+                          Here, you will not only learn how to recognize and write the Arabic letters but also enhance your vocabulary and reading skills through interactive exercises and practical applications. It's a journey toward mastering a crucial part of your identity and reconnecting with your cultural heritage.
+                      </p>
+                  </div>
+              </div>
+          </section>
+         
+          <section id="boxes">
+            <div class="test-section">
+                <h3>Check Your Arabic Proficiency</h3>
+                <p>Take our interactive test and find out your strengths and areas to improve.</p>
+              <button onclick="startTest()">Start Proficiency Test</button>
+            </div>
+            
+
+              <div class="container">
+                  <div class="box">
+                      <h3><a href="letters.html">Arabic Alphabet</a></h3>
+                      <p>Begin your journey by familiarizing yourself with the Arabic alphabet.</p>
+                  </div>
+                  <div class="box">
+                      <h3><a href="exercises.html">Interactive Exercises</a></h3>
+                      <p>Strengthen your reading and writing skills with our engaging exercises.</p>
+                  </div>
+              </div>
+          </section>
+
+          <footer id="footer">
+              <p>Arabic Learning Site &copy; 2023</p>
+          </footer>
+      </div>
+    </div>
+    <div id="test-section" style.display = block>
+        <div id="question-display">Question will appear here</div>
+        <div id="options-display">
+            <!-- Options will be dynamically inserted here -->
+        </div>
+        <div id="test-result"></div>
+        <button onclick="startTest()">Start Test</button>
+        <button onclick="exitTest()">Exit Test</button>
+    </div>
+
+      <script src="script.js"></script>
+  </body>
+</html>

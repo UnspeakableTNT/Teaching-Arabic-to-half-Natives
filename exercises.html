@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>Arabic Word Exercises</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <style>
+        body {
+            font-family: 'Arial', 'Noto Naskh Arabic', sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #50b3a2;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #e8491d 3px solid;
+        }
+        header a {
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        header ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            overflow: hidden;
+        }
+        header li {
+            float: left;
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+        header #branding {
+            float: left;
+        }
+        header #branding h1 {
+            margin: 0;
+        }
+        header nav {
+            float: right;
+            margin-top: 10px;
+        }
+        header .highlight, header .current a {
+            color: #e8491d;
+            font-weight: bold;
+        }
+        header a:hover {
+            color: #ffffff;
+            font-weight: bold;
+        }
+        #pronunciationFeedback {
+            color: #4CAF50; /* Green for positive feedback */
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        #start-recording, #stop-recording {
+            background-color: #4b0082;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #start-recording:hover, #stop-recording:hover {
+            background-color: #6a0dad;
+        }
+        #skip-button {
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><span class="highlight">Arabic</span> Word Exercises</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="current"><a href="exercises.html">Exercises</a></li>
+                    <li><a href="letters.html">Letters</a></li>
+                    <li><a href="cultural_insights.html">Cultural Insights</a></li> <!-- New link -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <section id="showcase">
+            <div class="container">
+                <h1>Practice Arabic with Interactive Exercises</h1>
+                <p>Improve your Arabic language skills with a variety of word exercises.</p>
+            </div>
+        </section>
+
+          <section id="main">
+              <div class="container">
+                  <article id="main-col">
+                      <h1 class="page-title">Exercises</h1>
+                      <p id="arabicWord" class="word-display"></p>
+                    <p>Note: The text-to-speech feature is provided for convenience, but it may not accurately represent the correct pronunciation of Arabic words. Please use it as a guide only and consult other resources for precise pronunciation. Or you can ask me to pronounce it for you.</p>
+                      <button id="start-recording">Start Pronunciation</button>
+                      <button id="stop-recording">Stop Pronunciation</button>
+                      <p id="pronunciationFeedback"></p>
+                      <button id="skip-button" onclick="skipWord()">Skip Word</button>
+                      <button onclick="resetProgress()">Restart Practice</button>
+                      <button id="speak-button">Speak</button>
+                      <button id="toggleMeaningBtn" onclick="toggleMeaning()">Hide Meaning</button>
+                      <button id="toggleExampleBtn" onclick="toggleExample()">Hide Example</button>
+                      <div id="wordMeaning" class="word-details"></div>
+                      <div id="wordExample" class="word-details"></div>
+                      <button id="speakSen-button">Speak Sentence</button>
+                      <br>
+                      <label>
+                          <input type="checkbox" id="learnedBeyondDad"> Learned letters beyond 'Dad' (ض)
+                      </label>
+                      <br><br>
+                      <button onclick="updateWordDisplay()">Generate Next Word</button>
+                      <p id="scoreDisplay">Score: 0 / 0</p>
+                      <div id="quizSection">
+                          <p id="quizWord" class="word-display"></p>
+                          <div id="choices"></div>
+                          <button onclick="checkAnswer()">Submit Answer</button>
+                          <p id="quizFeedback"></p>
+                          <button onclick="generateQuiz()">Next Question</button>
+                      </div>
+                  </article>
+              </div>
+          </section>
+
+        <footer id="footer">
+            <p>Arabic Learning Site &copy; 2023</p>
+        </footer>
+    </div>
+  <script>
+      window.onload = function() {
+          if (localStorage.getItem("accessGranted") === "true") {
+              customizeForAnny();
+          }
+      };
+
+      function customizeForAnny() {
+          document.getElementById("branding").innerHTML = '<h1><span class="highlight">Anny\'s</span> Word Adventures</h1>';
+          document.querySelector('#showcase h1').textContent = 'Explore Arabic Words with Fun, Anny! 🌟';
+          document.querySelector('#showcase p').textContent = 'Discover new words and practice them in exciting ways!';
+          document.getElementById("footer").innerHTML = '<p>Anny\'s Arabic Learning Site &copy; 2023</p>';
+          var footer = document.getElementById('footer');
+          if (footer) {
+              footer.appendChild(removeKeyButton);
+          }
+      }
+  </script>
+  <script>
+    var arabicWordsWithDetails = {
+      "أرض": {"meaning": "Earth, land", "example": "هذه أرض خصبة - This is fertile land"},
+      "برد": {"meaning": "Cold", "example": "أشعر بالبرد - I feel cold"},
+      "تمر": {"meaning": "Dates", "example": "التمر غني بالطاقة - Dates are rich in energy"},
+      "ثوب": {"meaning": "Garment, dress", "example": "أحب ثوبي الجديد - I like my new dress"},
+      "جرس": {"meaning": "Bell", "example": "يدق الجرس في الصباح - The bell rings in the morning"},
+      "حذر": {"meaning": "Caution", "example": "يجب التحلي بالحذر - One must exercise caution"},
+      "خبر": {"meaning": "News", "example": "سمعت خبراً مهماً - I heard an important piece of news"},
+      "درس": {"meaning": "Lesson", "example": "الدرس مفيد - The lesson is useful"},
+      "ذهب": {"meaning": "Gold", "example": "الذهب معدن ثمين - Gold is a precious metal"},
+      "ربح": {"meaning": "Profit", "example": "حققت شركتنا ربحاً كبيراً - Our company made a large profit"},
+      "زهر": {"meaning": "Flower", "example": "الزهر جميل في الربيع - Flowers are beautiful in spring"},
+      "سرب": {"meaning": "Flock, group", "example": "رأيت سرباً من الطيور - I saw a flock of birds"},
+      "شجر": {"meaning": "Trees", "example": "الشجر ينمو في الغابة - Trees grow in the forest"},
+      "صبر": {"meaning": "Patience", "example": "الصبر مفتاح الفرج - Patience is the key to relief"},
+      "ضرب": {"meaning": "Hit, strike", "example": "ضرب الكرة بقوة - He hit the ball hard"},
+      "طير": {"meaning": "Bird", "example": "الطير يغرد في الصباح - The bird sings in the morning"},
+      "ظرف": {"meaning": "Envelope, circumstance", "example": "وضعت الرسالة في الظرف - I put the letter in the envelope"},
+      "عرب": {"meaning": "Arabs", "example": "العرب يعيشون في الشرق الأوسط - Arabs live in the Middle East"},
+      "غرب": {"meaning": "West", "example": "تغرب الشمس في الغرب - The sun sets in the west"},
+      "فهم": {"meaning": "Understanding", "example": "فهم الدرس جيداً - He understood the lesson well"},
+      "قلم": {"meaning": "Pen", "example": "أكتب بالقلم - I write with a pen"},
+      "كتاب": {"meaning": "Book", "example": "هذا كتاب مفيد - This is a useful book"},
+      "ليل": {"meaning": "Night", "example": "الليل هادئ - The night is calm"},
+      "ماء": {"meaning": "Water", "example": "الماء ضروري للحياة - Water is essential for life"},
+      "نار": {"meaning": "Fire", "example": "اشتعلت النار في الغابة - Fire broke out in the forest"},
+      "هدى": {"meaning": "Guidance", "example": "نسأل الله الهدى والتقى - We ask God for guidance and piety"},
+      "وقت": {"meaning": "Time", "example": "الوق"},
+        // ... Additional words ...
+      "وقت": {"meaning": "Time", "example": "الوقت ثمين - Time is precious"},
+      "يد": {"meaning": "Hand", "example": "غسل يديه قبل الأكل - He washed his hands before eating"},
+      "بيت": {"meaning": "House", "example": "بيتي مريح - My house is comfortable"},
+      "جمل": {"meaning": "Camel", "example": "الجمل حيوان صحراوي - The camel is a desert animal"},
+      "دار": {"meaning": "Home, house", "example": "دار الأيتام ترعى الأطفال - The orphanage cares for children"},
+      "سماء": {"meaning": "Sky", "example": "السماء صافية اليوم - The sky is clear today"},
+      "شمس": {"meaning": "Sun", "example": "الشمس مشرقة - The sun is shining"},
+      "صحراء": {"meaning": "Desert", "example": "الصحراء واسعة - The desert is vast"},
+      "ضياء": {"meaning": "Light, radiance", "example": "ضياء القمر جميل - The moon's light is beautiful"},
+      "طعام": {"meaning": "Food", "example": "الطعام لذيذ - The food is delicious"},
+      "ظل": {"meaning": "Shade, shadow", "example": "جلس تحت الظل - He sat in the shade"},
+      "عين": {"meaning": "Eye", "example": "عيناها زرقاوان - Her eyes are blue"},
+      "غابة": {"meaning": "Forest", "example": "الغابة مليئة بالأشجار - The forest is full of trees"},
+      "فرح": {"meaning": "Happiness", "example": "فرح الطفل بالهدية - The child was happy with the gift"},
+      "قمر": {"meaning": "Moon", "example": "القمر مضيء في الليل - The moon is bright at night"},
+      "كرسي": {"meaning": "Chair", "example": "الكرسي مريح - The chair is comfortable"},
+      "لعبة": {"meaning": "Toy, game", "example": "الطفل يلعب بلعبته - The child is playing with his toy"},
+      "مدينة": {"meaning": "City", "example": "المدينة صاخبة - The city is noisy"},
+      "نجمة": {"meaning": "Star", "example": "نجمة في السماء - A star in the sky"},
+      "هاتف": {"meaning": "Telephone", "example": "تحدث عبر الهاتف - He talked over the phone"},
+      "أرض": {"meaning": "Earth, land", "example": "هذه أرض خصبة - This is fertile land"},
+      "برد": {"meaning": "Cold", "example": "أشعر بالبرد - I feel cold"},
+      "تمر": {"meaning": "Dates", "example": "التمر غني بالطاقة - Dates are rich in energy"},
+      "ثوب": {"meaning": "Garment, dress", "example": "أحب ثوبي الجديد - I like my new dress"},
+      "جرس": {"meaning": "Bell", "example": "يدق الجرس في الصباح - The bell rings in the morning"},
+      "حذر": {"meaning": "Caution", "example": "يجب التحلي بالحذر - One must exercise caution"},
+      "خبر": {"meaning": "News", "example": "سمعت خبراً مهماً - I heard an important piece of news"},
+      "درس": {"meaning": "Lesson", "example": "الدرس مفيد - The lesson is useful"},
+      "ذهب": {"meaning": "Gold", "example": "الذهب معدن ثمين - Gold is a precious metal"},
+      "ربح": {"meaning": "Profit", "example": "حققت شركتنا ربحاً كبيراً - Our company made a large profit"},
+      "زهر": {"meaning": "Flower", "example": "الزهر جميل في الربيع - Flowers are beautiful in spring"},
+      "سرب": {"meaning": "Flock, group", "example": "رأيت سرباً من الطيور - I saw a flock of birds"},
+      "شجر": {"meaning": "Trees", "example": "الشجر ينمو في الغابة - Trees grow in the forest"},
+      "صبر": {"meaning": "Patience", "example": "الصبر مفتاح الفرج - Patience is the key to relief"},
+      "ضرب": {"meaning": "Hit, strike", "example": "ضرب الكرة بقوة - He hit the ball hard"},
+      "طير": {"meaning": "Bird", "example": "الطير يغرد في الصباح - The bird sings in the morning"},
+      "ظرف": {"meaning": "Envelope, circumstance", "example": "وضعت الرسالة في الظرف - I put the letter in the envelope"},
+      "عرب": {"meaning": "Arabs", "example": "العرب يعيشون في الشرق الأوسط - Arabs live in the Middle East"},
+      "غرب": {"meaning": "West", "example": "تغرب الشمس في الغرب - The sun sets in the west"},
+      "فهم": {"meaning": "Understanding", "example": "فهم الدرس جيداً - He understood the lesson well"},"باب": {"meaning": "Door", "example": "الباب مفتوح - The door is open"},
+      "جبل": {"meaning": "Mountain", "example": "الجبل عالٍ - The mountain is high"},
+      "حب": {"meaning": "Love", "example": "الحب جميل - Love is beautiful"},
+      "خبز": {"meaning": "Bread", "example": "الخبز طازج - The bread is fresh"},
+      "درهم": {"meaning": "Dirham", "example": "لدي عشرة دراهم - I have ten dirhams"},
+      "ذهن": {"meaning": "Mind", "example": "ذهني واضح - My mind is clear"},
+      "رحمة": {"meaning": "Mercy", "example": "الرحمة مهمة - Mercy is important"},
+      "زهرة": {"meaning": "Flower", "example": "زهرة الربيع - The spring flower"},
+      "سماء": {"meaning": "Sky", "example": "السماء زرقاء - The sky is blue"},
+      "شمس": {"meaning": "Sun", "example": "الشمس مشرقة - The sun is shining"},
+      "صحراء": {"meaning": "Desert", "example": "الصحراء واسعة - The desert is vast"},
+      "ضوء": {"meaning": "Light", "example": "ضوء القمر - The moonlight"},
+      "طبيعة": {"meaning": "Nature", "example": "الطبيعة خلابة - Nature is beautiful"},
+      "ظل": {"meaning": "Shadow", "example": "ظل الشجرة - The shadow of the tree"},
+      "عين": {"meaning": "Eye", "example": "عيناها زرقاوان - Her eyes are blue"},
+      "غابة": {"meaning": "Forest", "example": "الغابة مليئة بالأشجار - The forest is full of trees"},
+      "فكرة": {"meaning": "Idea", "example": "لدي فكرة جديدة - I have a new idea"},
+      "قلب": {"meaning": "Heart", "example": "قلبي ينبض - My heart is beating"},
+      "كتاب": {"meaning": "Book", "example": "أحب قراءة الكتب - I love reading books"},
+      "ليل": {"meaning": "Night", "example": "الليل هادئ - The night is calm"},
+      "مدينة": {"meaning": "City", "example": "المدينة نابضة بالحياة - The city is bustling with life"},
+      "نجم": {"meaning": "Star", "example": "نجم في السماء - A star in the sky"},
+      "هدية": {"meaning": "Gift", "example": "تلقيت هدية - I received a gift"},
+      "ورد": {"meaning": "Roses", "example": "ورد أحمر - Red roses"},
+      "يد": {"meaning": "Hand", "example": "يد العون - A helping hand"}
+    };
+
+      var score = 0;
+      var totalQuestionsAsked = 0;
+      var currentCorrectAnswer = "";
+      var currentSelectedAnswer = "";
+
+      function getRandomWord(learnedBeyondDad) {
+          var words = Object.keys(arabicWordsWithDetails);
+          var filteredWords = learnedBeyondDad ? words : words.filter(word => !/[طظعغفقكلمنهوي]/.test(word));
+          return filteredWords[Math.floor(Math.random() * filteredWords.length)];
+      }
+
+      function updateWordDisplay() {
+          var learnedBeyondDad = document.getElementById('learnedBeyondDad').checked;
+          var words = Object.keys(arabicWordsWithDetails).filter(word => !correctlyPronouncedWords.includes(word));
+          var filteredWords = learnedBeyondDad ? words : words.filter(word => !/[طظعغفقكلمنهوي]/.test(word));
+  
+          if (filteredWords.length === 0) {
+              document.getElementById('arabicWord').innerText = "Congratulations! You've practiced all words.";
+              // You can add more logic here, like showing a 'Restart' button or similar
+              return;
+          }
+
+          var word = filteredWords[Math.floor(Math.random() * filteredWords.length)];
+          var details = arabicWordsWithDetails[word];
+
+          document.getElementById('arabicWord').innerText = word;
+          document.getElementById('wordMeaning').innerText = 'Meaning: ' + details.meaning;
+          document.getElementById('wordExample').innerText = 'Example: ' + details.example;
+      }
+
+      function generateQuiz() {
+          var word = getRandomWord(true); 
+          var correctMeaning = arabicWordsWithDetails[word].meaning;
+          currentCorrectAnswer = correctMeaning;
+
+          var meanings = Object.values(arabicWordsWithDetails).map(detail => detail.meaning);
+          var incorrectMeanings = meanings.filter(meaning => meaning !== correctMeaning);
+          shuffleArray(incorrectMeanings);
+          var choices = incorrectMeanings.slice(0, 3);
+          choices.push(correctMeaning);
+          shuffleArray(choices);
+
+          document.getElementById('quizWord').innerText = word;
+          var choicesContainer = document.getElementById('choices');
+          choicesContainer.innerHTML = '';
+          choices.forEach(choice => {
+              var button = document.createElement('button');
+              button.innerText = choice;
+              button.onclick = function() { selectAnswer(choice); };
+              choicesContainer.appendChild(button);
+          });
+          selectAnswer(1);
+          document.getElementById('quizFeedback').innerText = '';
+          currentSelectedAnswer = "";
+      }
+
+      function selectAnswer(selectedChoice) {
+          currentSelectedAnswer = selectedChoice;
+
+          // Update button styles to indicate the selected choice
+          var buttons = document.getElementById('choices').getElementsByTagName('button');
+          for (var i = 0; i < buttons.length; i++) {
+              buttons[i].style.backgroundColor = buttons[i].innerText === selectedChoice ? '#4CAF50' : '';
+              buttons[i].style.color = buttons[i].innerText === selectedChoice ? 'white' : 'black';
+          }
+      }
+
+      function checkAnswer() {
+          var feedback = "";
+          totalQuestionsAsked++;
+
+          if (currentSelectedAnswer === currentCorrectAnswer) {
+              score++;
+              generateQuiz();
+              feedback = 'Correct!';
+
+          } else {
+              feedback = 'Incorrect. The correct answer was ' + currentCorrectAnswer;
+          }
+
+          document.getElementById('quizFeedback').innerText = feedback;
+          updateScoreDisplay();
+      }
+
+      function updateScoreDisplay() {
+          document.getElementById('scoreDisplay').innerText = `Score: ${score} / ${totalQuestionsAsked}`;
+      }
+
+      function shuffleArray(array) {
+          for (var i = array.length - 1; i > 0; i--) {
+              var j = Math.floor(Math.random() * (i + 1));
+              var temp = array[i];
+              array[i] = array[j];
+              array[j] = temp;
+          }
+      }
+
+      document.addEventListener('DOMContentLoaded', function() {
+          updateWordDisplay();
+          updateScoreDisplay();
+      });
+      function toggleMeaning() {
+          var meaningDiv = document.getElementById('wordMeaning');
+          var btn = document.getElementById('toggleMeaningBtn');
+          if (meaningDiv.style.display === 'none') {
+              meaningDiv.style.display = 'block';
+              btn.src = 'hide_icon.png'; // Path to your hide icon
+          } else {
+              meaningDiv.style.display = 'none';
+              btn.src = 'show_icon.png'; // Path to your show icon
+          }
+      }
+
+      function toggleExample() {
+          var exampleDiv = document.getElementById('wordExample');
+          var btn = document.getElementById('toggleExampleBtn');
+          if (exampleDiv.style.display === 'none') {
+              exampleDiv.style.display = 'block';
+              btn.src = 'hide_icon.png'; // Path to your hide icon
+          } else {
+              exampleDiv.style.display = 'none';
+              btn.src = 'show_icon.png'; // Path to your show icon
+          }
+      }
+      function sendToServer(event) {
+          event.preventDefault();
+          const text = document.getElementById('textInput').value;
+          fetch('/write', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              body: `content=${encodeURIComponent(text)}`
+          })
+          .then(response => response.text())
+          .then(data => console.log(data))
+          .catch(error => console.error('Error:', error));
+      }
+      const speakButton = document.getElementById("speak-button");
+      speakButton.addEventListener("click", function() {
+        speakText(document.getElementById('arabicWord').innerText);
+        console.log(document.getElementById('arabicWord').innerText);
+        // Code for text-to-speech functionality will go here
+      });
+      const speakSenButton = document.getElementById("speakSen-button");
+      speakSenButton.addEventListener("click", function() {
+        speakText(filterEnglish(document.getElementById('wordExample').innerText));
+        console.log(filterEnglish(document.getElementById('wordExample').innerText));
+        // Code for text-to-speech functionality will go here
+      });
+      function speakText(text) {
+        if ('speechSynthesis' in window) {
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = "ar-EG"; // Set language to Arabic (Egypt)
+
+          speechSynthesis.speak(utterance);
+        } else {
+          console.error("Text-to-speech not supported");
+        }
+      }
+      function filterEnglish(text) {
+          // Regex pattern to match English words
+          // This pattern assumes English words are made of characters a-z (case-insensitive)
+          var pattern = /\b[a-zA-Z]+\b/g;
+
+          // Replace English words with an empty string
+          var filteredText = text.replace(pattern, '');
+
+          return filteredText;
+      }
+      var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+      var recognition = new SpeechRecognition();
+  
+      recognition.lang = 'ar-EG'; // Set the language to Arabic (Saudi Arabia)
+      recognition.continuous = false;
+  
+      var correctlyPronouncedWords = [];
+  
+      recognition.onresult = function(event) {
+          var userPronunciation = event.results[0][0].transcript;
+          var correctWord = document.getElementById('arabicWord').innerText;
+          var feedbackMessage = '';
+  
+          if (userPronunciation === correctWord) {
+              feedbackMessage = 'Great job! Your pronunciation is correct. 👍';
+              if (!correctlyPronouncedWords.includes(correctWord)) {
+                  correctlyPronouncedWords.push(correctWord);
+              }
+              updateWordDisplay();
+          } else {
+              feedbackMessage = `Keep trying! You said "${userPronunciation}", but the correct pronunciation is "${correctWord}".`;
+          }
+  
+          document.getElementById('pronunciationFeedback').innerText = feedbackMessage; // Call this function to update the word after feedback
+      };
+  
+      document.getElementById('start-recording').onclick = function() {
+          recognition.start();
+          document.getElementById('pronunciationFeedback').innerText = 'Listening...';
+      };
+  
+      document.getElementById('stop-recording').onclick = function() {
+          recognition.stop();
+          document.getElementById('pronunciationFeedback').innerText = 'Stoped listening.';
+      };
+      function resetProgress() {
+          correctlyPronouncedWords = [];
+          updateWordDisplay();
+      }
+    function skipWord() {
+        var learnedBeyondDad = document.getElementById('learnedBeyondDad').checked;
+        var currentWord = document.getElementById('arabicWord').innerText;
+        var words = Object.keys(arabicWordsWithDetails);
+
+        // Remove the current word from the list
+        words = words.filter(word => word !== currentWord);
+        var filteredWords = learnedBeyondDad ? words : words.filter(word => !/[طظعغفقكلمنهوي]/.test(word));
+
+        // Select a new word
+        var newWord = filteredWords[Math.floor(Math.random() * filteredWords.length)];
+        var details = arabicWordsWithDetails[newWord];
+
+        document.getElementById('arabicWord').innerText = newWord;
+        document.getElementById('wordMeaning').innerText = 'Meaning: ' + details.meaning;
+        document.getElementById('wordExample').innerText = 'Example: ' + details.example;
+    }
+
+
+      
+
+
+
+  </script>
+  <script src="script.js"></script>
+  <script src="path/to/library.js"></script>
+  </body>
+  </html>

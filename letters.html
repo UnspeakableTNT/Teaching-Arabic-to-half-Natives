@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>Arabic Alphabet</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  <style>
+      body {
+          font-family: 'Arial', 'Noto Naskh Arabic', sans-serif;
+          text-align: center;
+          background-color: #f4f4f4;
+          margin: 0;
+          padding: 0;
+      }
+      .container {
+          width: 80%;
+          margin: auto;
+          overflow: hidden;
+      }
+      header {
+          background: #50b3a2;
+          color: #fff;
+          padding-top: 30px;
+          min-height: 70px;
+          border-bottom: #e8491d 3px solid;
+      }
+      header a {
+          color: #ffffff;
+          text-decoration: none;
+          text-transform: uppercase;
+          font-size: 16px;
+      }
+      header ul {
+          padding: 0;
+          margin: 0;
+          list-style: none;
+          overflow: hidden;
+      }
+      header li {
+          float: left;
+          display: inline;
+          padding: 0 20px 0 20px;
+      }
+      header #branding {
+          float: left;
+      }
+      header #branding h1 {
+          margin: 0;
+      }
+      header nav {
+          float: right;
+          margin-top: 10px;
+      }
+      header .highlight, header .current a {
+          color: #e8491d;
+          font-weight: bold;
+      }
+      header a:hover {
+          color: #ffffff;
+          font-weight: bold;
+      }
+  </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><span class="highlight">Arabic</span> Alphabet</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="exercises.html">Exercises</a></li>
+                    <li class="current"><a href="letters.html">Letters</a></li>
+                    <li><a href="cultural_insights.html">Cultural Insights</a></li> <!-- New link -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <section id="main">
+            <div class="container">
+                <article id="main-col">
+                    <h1 class="page-title">Explore Arabic Alphabet</h1>
+                    <p>Learn each letter of the Arabic alphabet and their sounds.</p>
+                    <!-- Add buttons for all letters -->
+                  <button class="nav-button" onclick="window.location.href='alif.html'">أ - Alif</button>
+                  <button class="nav-button" onclick="window.location.href='ba.html'">ب - Beh</button>
+                  <button class="nav-button" onclick="window.location.href='ta.html'">ت - Teh</button>
+                  <button class="nav-button" onclick="window.location.href='tha.html'">ث - Theh</button>
+                  <button class="nav-button" onclick="window.location.href='jeem.html'">ج - Jeem/Geem</button>
+                  <button class="nav-button" onclick="window.location.href='ha.html'">ح - Ha</button>
+                  <button class="nav-button" onclick="window.location.href='kha.html'">خ - Kha</button>
+                  <button class="nav-button" onclick="window.location.href='dal.html'">د - Dal</button>
+                  <button class="nav-button" onclick="window.location.href='thal.html'">ذ - Thal</button>
+                  <button class="nav-button" onclick="window.location.href='ra.html'">ر - Reh</button>
+                  <button class="nav-button" onclick="window.location.href='zay.html'">ز - Zeh</button>
+                  <button class="nav-button" onclick="window.location.href='seen.html'">س - Seen</button>
+                  <button class="nav-button" onclick="window.location.href='sheen.html'">ش - Sheen</button>
+                  <button class="nav-button" onclick="window.location.href='sad.html'">ص - Sad</button>
+                  <button class="nav-button" onclick="window.location.href='dad.html'">ض - Dad</button>
+                  <button class="nav-button" onclick="window.location.href='tah.html'">ط - Tah</button>
+                  <button class="nav-button" onclick="window.location.href='zah.html'">ظ - Zah</button>
+                  <button class="nav-button" onclick="window.location.href='ain.html'">ع - Ain</button>
+                  <button class="nav-button" onclick="window.location.href='ghain.html'">غ - Ghain</button>
+                  <button class="nav-button" onclick="window.location.href='fa.html'">ف - Feh</button>
+                  <button class="nav-button" onclick="window.location.href='qaf.html'">ق - Qaf</button>
+                  <button class="nav-button" onclick="window.location.href='kaf.html'">ك - Kaf</button>
+                  <button class="nav-button" onclick="window.location.href='lam.html'">ل - Lam</button>
+                  <button class="nav-button" onclick="window.location.href='meem.html'">م - Meem</button>
+                  <button class="nav-button" onclick="window.location.href='noon.html'">ن - Noon</button>
+                  <button class="nav-button" onclick="window.location.href='heh.html'">ه - Heh</button>
+                  <button class="nav-button" onclick="window.location.href='waw.html'">و - Waw</button>
+                  <button class="nav-button" onclick="window.location.href='yeh.html'">ي - Yeh</button>
+                    <!-- Continue adding buttons for other letters -->
+                </article>
+            </div>
+        </section>
+
+        <footer id="footer">
+            <p>Arabic Learning Site &copy; 2023</p>
+        </footer>
+    </div>
+  <script>
+      window.onload = function() {
+          // Check if Anny's access code is stored
+          if (localStorage.getItem("accessGranted") === "true") {
+              customizeForAnny();
+          }
+      };
+
+      function customizeForAnny() {
+          // Customizing the branding
+          document.getElementById("branding").innerHTML = '<h1><span class="highlight">Anny\'s</span> Arabic Alphabet Adventure</h1>';
+          // Updating the main section's title and description
+          document.querySelector('#main h1').textContent = 'Anny\'s Arabic Alphabet Journey 🌈';
+          document.querySelector('#main p').textContent = 'Let\'s explore the sounds and shapes of each Arabic letter together! 🎨';
+        document.getElementById("footer").innerHTML = '<p>Anny\'s Arabic Learning Site &copy; 2023</p>';
+          // Appending the 'Remove Key' button to the footer
+          var footer = document.getElementById('footer');
+          if (footer) {
+              footer.appendChild(removeKeyButton);
+          }
+      }
+  </script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>Learn Heh (ه)</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+        }
+        h1 {
+            color: #4b0082;
+        }
+        section {
+            margin: 20px;
+            padding: 10px;
+            background-color: #fff0f5;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            background-color: #4b0082;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #6a0dad;
+        }
+    </style>
+</head>
+<body>
+  <h1>Learn About ه (Heh) and ة (Taa Marbuta)</h1>
+
+  <!-- Heh Appearance -->
+  <section>
+      <h2>Appearance of ه (Heh)</h2>
+      <p><strong>Beginning:</strong> هـ (e.g., هنا - Huna)</p>
+      <p><strong>Middle:</strong> ـهـ (e.g., بهجة - Bahja)</p>
+      <p><strong>End:</strong> ـه (e.g., سماه - Samah)</p>
+  </section>
+
+  <!-- Taa Marbuta -->
+  <section>
+      <h2>Taa Marbuta (ة)</h2>
+      <p>Taa Marbuta (ة) is a special form of 'Heh' used at the end of some feminine nouns and adjectives. It looks like a 'Heh' with two dots on top. It is pronounced like a regular 'Heh' (ه).</p>
+      <p>For example: مدرسة (Madrasah - school), ساعة (Saa'ah - hour)</p>
+  </section>
+
+  <!-- Heh Pronunciation -->
+  <section>
+      <h2>Pronunciation of ه (Heh) and ة (Taa Marbuta)</h2>
+      <p>The letter ه (Heh) and ة (Taa Marbuta) are pronounced as 'h' in 'happy'. It's a voiceless glottal fricative sound.</p>
+  </section>
+    <!-- Example Word -->
+    <section>
+        <h2>Interactive Exercise: Read and Understand</h2>
+        <p id="wordToRead">Example Word: <strong></strong></p>
+        <p>What does the word mean? Type your answer:</p>
+        <input type="text" id="userAnswer" placeholder="Your answer">
+        <button onclick="checkAnswer()">Submit Answer</button>
+        <p id="feedback"></p>
+        <button id="nextWordBtn" onclick="nextWord()">Next Word</button>
+    </section>
+
+    <button onclick="window.location.href='index.html'">Back to Main Page</button>
+
+    <script>
+        var currentWordIndex = 0;
+        var words = [
+            {"arabic": "هنا", "meaning": "here"},
+            {"arabic": "بهجة", "meaning": "joy"},
+            {"arabic": "هدية", "meaning": "gift"},
+            {"arabic": "دهشة", "meaning": "amazement"}, 
+            {"arabic": "هرم", "meaning": "pyramid"},
+            {"arabic": "أهل", "meaning": "family"},
+            {"arabic": "فهم", "meaning": "understood"},
+            // Add more words as needed
+        ];
+
+        function updateWordDisplay() {
+            document.getElementById('wordToRead').innerHTML = 'Example Word: <strong>' + words[currentWordIndex].arabic + '</strong>';
+            document.getElementById('userAnswer').value = '';
+            document.getElementById('feedback').textContent = '';
+        }
+
+        function checkAnswer() {
+            var userAnswer = document.getElementById('userAnswer').value.trim().toLowerCase();
+            var correctAnswer = words[currentWordIndex].meaning;
+            var feedback = document.getElementById('feedback');
+
+            if (userAnswer === correctAnswer) {
+                feedback.textContent = 'Correct! ' + words[currentWordIndex].arabic + ' means "' + correctAnswer + '".';
+                feedback.style.color = 'green';
+            } else {
+                feedback.textContent = 'Not quite. ' + words[currentWordIndex].arabic + ' means "' + correctAnswer + '".';
+                feedback.style.color = 'red';
+            }
+        }
+
+        function nextWord() {
+            currentWordIndex = (currentWordIndex + 1) % words.length;
+            updateWordDisplay();
+        }
+
+        document.addEventListener('DOMContentLoaded', updateWordDisplay);
+    </script>
+    <button onclick="window.location.href='noon.html'">Previous letter</button>
+    <button onclick="window.location.href='waw.html'">Next letter</button>
+</body>
+</html>

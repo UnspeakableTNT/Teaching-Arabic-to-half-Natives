@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>Learn Noon (ن)</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+        }
+        h1 {
+            color: #4b0082;
+        }
+        section {
+            margin: 20px;
+            padding: 10px;
+            background-color: #fff0f5;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            background-color: #4b0082;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #6a0dad;
+        }
+    </style>
+</head>
+<body>
+    <h1>Learn About ن (Noon)</h1>
+
+    <!-- Noon Appearance -->
+    <section>
+        <h2>Appearance of ن (Noon)</h2>
+        <p><strong>Beginning:</strong> نـ (e.g., نور - Noor)</p>
+        <p><strong>Middle:</strong> ـنـ (e.g., فنان - Fannan)</p>
+        <p><strong>End:</strong> ـن (e.g., بن - Ban)</p>
+    </section>
+
+    <!-- Noon Pronunciation -->
+    <section>
+        <h2>Pronunciation of ن (Noon)</h2>
+        <p>The letter ن (Noon) is pronounced as 'n' in 'noon'. It's a nasal consonant sound.</p>
+    </section>
+
+    <!-- Example Word -->
+    <section>
+        <h2>Interactive Exercise: Read and Understand</h2>
+        <p id="wordToRead">Example Word: <strong></strong></p>
+        <p>What does the word mean? Type your answer:</p>
+        <input type="text" id="userAnswer" placeholder="Your answer">
+        <button onclick="checkAnswer()">Submit Answer</button>
+        <p id="feedback"></p>
+        <button id="nextWordBtn" onclick="nextWord()">Next Word</button>
+    </section>
+
+    <button onclick="window.location.href='index.html'">Back to Main Page</button>
+
+    <script>
+        var currentWordIndex = 0;
+        var words = [
+            {"arabic": "سن", "meaning": "age"},
+            {"arabic": "نجم", "meaning": "star"},
+            {"arabic": "ابن", "meaning": "son"},
+            {"arabic": "فنان", "meaning": "artist"},  
+            {"arabic": "نبات", "meaning": "plants"},
+            {"arabic": "نهر", "meaning": "river"},
+            {"arabic": "جن", "meaning": "genie"},
+            {"arabic": "عنب", "meaning": "grapes"},
+            {"arabic": "نخل", "meaning": "palm trees"},
+            // Add more words as needed
+        ];
+
+        function updateWordDisplay() {
+            document.getElementById('wordToRead').innerHTML = 'Example Word: <strong>' + words[currentWordIndex].arabic + '</strong>';
+            document.getElementById('userAnswer').value = '';
+            document.getElementById('feedback').textContent = '';
+        }
+
+        function checkAnswer() {
+            var userAnswer = document.getElementById('userAnswer').value.trim().toLowerCase();
+            var correctAnswer = words[currentWordIndex].meaning;
+            var feedback = document.getElementById('feedback');
+
+            if (userAnswer === correctAnswer) {
+                feedback.textContent = 'Correct! ' + words[currentWordIndex].arabic + ' means "' + correctAnswer + '".';
+                feedback.style.color = 'green';
+            } else {
+                feedback.textContent = 'Not quite. ' + words[currentWordIndex].arabic + ' means "' + correctAnswer + '".';
+                feedback.style.color = 'red';
+            }
+        }
+
+        function nextWord() {
+            currentWordIndex = (currentWordIndex + 1) % words.length;
+            updateWordDisplay();
+        }
+
+        document.addEventListener('DOMContentLoaded', updateWordDisplay);
+    </script>
+    <button onclick="window.location.href='meem.html'">Previous letter</button>
+    <button 
+    <button onclick="window.location.href='heh.html'">Next letter</button>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>Learn Yeh (ي)</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+        }
+        h1 {
+            color: #4b0082;
+        }
+        section {
+            margin: 20px;
+            padding: 10px;
+            background-color: #fff0f5;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .example-image {
+            max-width: 100px;
+            height: auto;
+        }
+        button {
+            background-color: #4b0082;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #6a0dad;
+        }
+    </style>
+</head>
+<body>
+    <h1>Learn About ي (Yeh)</h1>
+
+    <!-- Yeh Appearance -->
+    <section>
+        <h2>Appearance of ي (Yeh)</h2>
+        <p><strong>Beginning:</strong> يـ (e.g., يوم - Yawm)</p>
+        <p><strong>Middle:</strong> ـيـ (e.g., مدينة - Madeenah)</p>
+        <p><strong>End:</strong> ـي (e.g., بيت - Bayt)</p>
+    </section>
+    <section>
+        <h2>Meaning and Usage of ي (Yeh) - Alif Layyinah (No Dots)</h2>
+        <p>In Arabic, the letter ي (Yeh) with no dots in the end, also known as "Alif Layyinah," is used for mostly verbs, and it sounds like an alif(this is why its called Alif Layyinah)</p>
+        <p>Example Word: حتى (hta) - This word means "until" and is pronounced with a Alif in the end rather than a normel "y"sound.</p>
+        <p>It's important to note that ي (Yeh) can also appear with dots in the end, which means its definitally a "Y" sound and sometimes it can apear with no dots and still be a "y" sound, it is really bassed on the word.</p>
+    </section>
+
+    <!-- Yeh Pronunciation -->
+    <section>
+        <h2>Pronunciation of ي (Yeh)</h2>
+        <p>The letter ي (Yeh) is pronounced as 'y' in 'yes'. It's a voiced palatal approximant sound.</p>
+    </section>
+
+    <!-- Example Word -->
+    <section>
+        <h2>Interactive Exercise: Read and Understand</h2>
+        <p id="wordToRead">Example Word: <strong></strong></p>
+        <p>What does the word mean? Type your answer:</p>
+        <input type="text" id="userAnswer" placeholder="Your answer">
+        <button onclick="checkAnswer()">Submit Answer</button>
+        <p id="feedback"></p>
+        <button id="nextWordBtn" onclick="nextWord()">Next Word</button>
+    </section>
+    <section>
+        <h2>THE END</h2>
+        <p>Wow, Anny, you did it! 🌟✨ Seeing you embrace each Arabic letter and make it your own has been incredible 📚. It's more than just learning an alphabet; it's about our journey together - filled with laughter 😄, challenges 🤔, and those awesome 'aha!' moments 🌈. You've shown such determination 💪 and joy 🌟 in every session. This isn't just about mastering letters; it's about connecting with a part of our shared heritage 👩‍👧‍👦, and you've done it so gracefully 🦋. I am incredibly proud of you, not just for learning these letters but for the way you’ve approached this journey – with curiosity 🧐, enthusiasm 🔥, and your wonderful spirit 💖. Here's to you, Anny, and to all the new doors 🚪 you've opened with this achievement. Can't wait to see where this adventure takes us next 🚀🌍!</p>
+    </section>
+
+    <button onclick="window.location.href='index.html'">Back to Main Page</button>
+
+    <script>
+        var currentWordIndex = 0;
+        var words = [
+            {"arabic": "يوم", "meaning": "day"},
+            {"arabic": "مدينة", "meaning": "city"},
+            {"arabic": "بيت", "meaning": "house"},
+            {"arabic": "يد", "meaning": "hand"},  
+            {"arabic": "سيارة", "meaning": "car"},
+            {"arabic": "شجرة", "meaning": "tree"},
+            // Add more words as needed
+        ];
+
+        function updateWordDisplay() {
+            document.getElementById('wordToRead').innerHTML = 'Example Word: <strong>' + words[currentWordIndex].arabic + '</strong>';
+            document.getElementById('userAnswer').value = '';
+            document.getElementById('feedback').textContent = '';
+        }
+
+        function checkAnswer() {
+            var userAnswer = document.getElementById('userAnswer').value.trim().toLowerCase();
+            var correctAnswer = words[currentWordIndex].meaning;
+            var feedback = document.getElementById('feedback');
+
+            if (userAnswer === correctAnswer) {
+                feedback.textContent = 'Correct! ' + words[currentWordIndex].arabic + ' means "' + correctAnswer + '".';
+                feedback.style.color = 'green';
+            } else {
+                feedback.textContent = 'Not quite. ' + words[currentWordIndex].arabic + ' means "' + correctAnswer + '".';
+                feedback.style.color = 'red';
+            }
+        }
+
+        function nextWord() {
+            currentWordIndex = (currentWordIndex + 1) % words.length;
+            updateWordDisplay();
+        }
+
+        document.addEventListener('DOMContentLoaded', updateWordDisplay);
+    </script>
+    <button onclick="window.location.href='waw.html'">Previous letter</button>
+</body>
+</html>

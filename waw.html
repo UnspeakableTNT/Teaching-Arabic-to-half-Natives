@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>Learn Waw (و)</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+        }
+        h1 {
+            color: #4b0082;
+        }
+        section {
+            margin: 20px;
+            padding: 10px;
+            background-color: #fff0f5;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            background-color: #4b0082;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #6a0dad;
+        }
+    </style>
+</head>
+<body>
+    <h1>Learn About و (Waw)</h1>
+
+    <!-- Waw Appearance -->
+    <section>
+        <h2>Appearance of و (Waw)</h2>
+        <p><strong>Beginning:</strong> وـ (e.g., ورد - Ward)</p>
+        <p><strong>Middle (Alif Rule):</strong> ـو (e.g., ولد - Walad)</p>
+        <p><strong>End:</strong> ـو (e.g., جملة - Jumlah)</p>
+    </section>
+
+    <!-- Waw Pronunciation -->
+    <section>
+        <h2>Pronunciation of و (Waw)</h2>
+        <p>The letter و (Waw) is pronounced as 'w' in 'water'. It's a voiced bilabial glide sound.</p>
+    </section>
+
+    <!-- Example Word -->
+    <section>
+        <h2>Interactive Exercise: Read and Understand</h2>
+        <p id="wordToRead">Example Word: <strong></strong></p>
+        <p>What does the word mean? Type your answer:</p>
+        <input type="text" id="userAnswer" placeholder="Your answer">
+        <button onclick="checkAnswer()">Submit Answer</button>
+        <p id="feedback"></p>
+        <button id="nextWordBtn" onclick="nextWord()">Next Word</button>
+    </section>
+
+    <button onclick="window.location.href='index.html'">Back to Main Page</button>
+
+    <script>
+        var currentWordIndex = 0;
+        var words = [
+            {"arabic": "ورد", "meaning": "flower"},
+            {"arabic": "موزة", "meaning": "banana"},
+            {"arabic": "جملة", "meaning": "sentence"},
+            {"arabic": "وجه", "meaning": "face"},
+            {"arabic": "واجب", "meaning": "duty"},
+            {"arabic": "وطن", "meaning": "homeland"},
+            {"arabic": "ساعة", "meaning": "watch"},
+            {"arabic": "وصفة", "meaning": "recipe"},
+            {"arabic": "وقت", "meaning": "time"},
+            {"arabic": "سلام", "meaning": "peace"},
+            // Add more words as needed
+        ];
+
+        function updateWordDisplay() {
+            document.getElementById('wordToRead').innerHTML = 'Example Word: <strong>' + words[currentWordIndex].arabic + '</strong>';
+            document.getElementById('userAnswer').value = '';
+            document.getElementById('feedback').textContent = '';
+        }
+
+        function checkAnswer() {
+            var userAnswer = document.getElementById('userAnswer').value.trim().toLowerCase();
+            var correctAnswer = words[currentWordIndex].meaning;
+            var feedback = document.getElementById('feedback');
+
+            if (userAnswer === correctAnswer) {
+                feedback.textContent = 'Correct! ' + words[currentWordIndex].arabic + ' means "' + correctAnswer + '".';
+                feedback.style.color = 'green';
+            } else {
+                feedback.textContent = 'Not quite. ' + words[currentWordIndex].arabic + ' means "' + correctAnswer + '".';
+                feedback.style.color = 'red';
+            }
+        }
+
+        function nextWord() {
+            currentWordIndex = (currentWordIndex + 1) % words.length;
+            updateWordDisplay();
+        }
+
+        document.addEventListener('DOMContentLoaded', updateWordDisplay);
+    </script>
+    <button onclick="window.location.href='heh.html'">Previous letter</button>
+    <button onclick="window.location.href='yeh.html'">Next letter</button>
+</body>
+</html>
